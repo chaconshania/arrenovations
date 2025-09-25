@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 
 import { Manrope } from "next/font/google";
+import { Footer } from "@/components/footer";
 const manrope = Manrope({ subsets: ["latin"], weight: "400" });
 
 const geistSans = Geist({
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className={`${manrope.className} ${manrope.className} antialiased`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

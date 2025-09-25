@@ -16,7 +16,7 @@ export default function Home() {
     <div>
       <section
         ref={ref}
-        className="relative h-[70vh] flex items-center justify-center overflow-hidden"
+        className="relative h-[70vh] flex items-center justify-center overflow-hidden mx-4 rounded-2xl"
       >
         <motion.div style={{ y }} className="absolute inset-0 z-0">
           <div
@@ -29,7 +29,7 @@ export default function Home() {
         </motion.div>
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10 " />
         {/* Hero */}
         <div className="relative z-20 text-center px-6 w-[850px]">
           <h1 className="text-4xl md:text-6xl font-bold text-white">
