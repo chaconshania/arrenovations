@@ -1,5 +1,6 @@
 "use client";
 
+import Grid from "@/components/grid";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -31,14 +32,12 @@ export default function Home() {
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10 " />
         {/* Hero */}
-        <div className="relative z-20 text-center px-6 w-[850px]">
-          <h1 className="text-4xl md:text-6xl font-bold text-white">
-            Professional Roofing & Siding Services
+        <div className="relative z-20 text-center px-6 ">
+          <h1 className="text-4xl md:leading-18 leading-none md:text-6xl font-bold text-white">
+           Connecticut Homes Deserve Better. <br /> We Build Them That Way.
           </h1>
           <p className="mt-6 text-md lg:text-lg text-gray-200 max-w-2xl mx-auto ">
-            Protect your home with reliable roofing and siding solutions. Our
-            licensed team provides roof repairs, replacements, and siding
-            installation.
+          Expert roofing, gutters, and exterior renovations from a local crew that treats your home like our own.
           </p>
         </div>
       </section>
@@ -48,7 +47,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="max-w-7xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-2 my-[10vh] ">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 mt-[10vh] mb-[5vh] ">
             <div>
               <h2 className="text-3xl font-bold  ">
                 Top notch roofing services, <br /> trusted by many in CT
@@ -56,15 +55,13 @@ export default function Home() {
             </div>
             <div className="pt-3 lg:pt-0">
               <p className="">
-                Our certified roofing contractors provide comprehensive roof
-                repair, roof replacement, and roof inspection services. Whether
-                you need emergency roof repair or a complete roof replacement,
-                our experienced roofing team delivers quality workmanship that
-                protects your home for years to come.
+               For over a decade, A&R Renovations has been the trusted name for roof repair, gutter installation, siding, and emergency fixes across Connecticut. We're not the biggest company out there—and that's exactly how our customers like it. <br /> <br />
+Every project gets our full attention, from the first call to the final cleanup. Whether you're dealing with storm damage, planning a full exterior refresh, or just need gutters that actually work, we show up on time, do it right, and stand behind our work.
               </p>
             </div>
           </div>
         </motion.div>
+        
       </section>
     </div>
   );
