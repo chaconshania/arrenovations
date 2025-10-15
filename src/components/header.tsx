@@ -24,17 +24,23 @@ export function Header() {
     >
       Free Estimate
     </Button>
+    
   );
 
   return (
     <>
+      <div className="p-2 bg-[#FF6900] text-center font-bold flex items-center justify-center">
+          <div><p>Call us today for a free estimate: (203) 943-8650</p></div>
+      </div>
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="sticky top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm "
       >
-        <div className="max-w-7xl mx-auto px-6 py-4">
+       
+        
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <motion.div className="text-xl font-extrabold">
               A&R RENOVATIONS

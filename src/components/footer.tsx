@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 export function Footer() {
   return (
-    <footer className="bg-[#0A0A0A] text-primary-foreground py-16 px-6">
-      <div className="max-w-7xl px-6  mx-auto">
+    <footer className="bg-[#0A0A0A] text-primary-foreground py-16 ">
+      <div className="max-w-7xl   mx-auto">
         <div className="grid md:grid-cols-4 gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
