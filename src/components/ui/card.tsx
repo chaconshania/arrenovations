@@ -123,6 +123,7 @@ export function Card({
         )}
       </div>
 
+      {/* Hover effect overlay */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         initial={false}

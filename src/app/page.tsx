@@ -14,15 +14,18 @@ export default function Home() {
   });
 
   const y = useTransform(scrollY, [0, 500], [0, 300]);
-  const y = useTransform(scrollY, [0, 500], [0, 200]);
 
   return (
     <div className="mx-4 space-y-10">
       <section
         ref={ref}
-        className="relative h-[70vh] flex items-center justify-center overflow-hidden  rounded-2xl"
+        className="relative h-[60vh] flex items-end justify-start overflow-hidden  rounded-2xl"
       >
-        <motion.div style={{ y }} className="absolute inset-0 z-0">
+        <motion.div
+          style={{ y }}
+          className="absolute inset-0 z-0"
+          aria-hidden="true"
+        >
           <div
             className="h-full w-full bg-cover bg-center"
             style={{
@@ -34,14 +37,14 @@ export default function Home() {
 
     
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10 " />
-        <div className="relative z-20 text-center ">
-          <h1 className="text-4xl md:text-6xl font-bold text-white">
-           CT HOMES DESERVE BETTER. <br /> We Build Them That Way.
+        <div className="relative z-20 px-6 py-8 md:px-12 md:py-12">
+          <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+           CT Homes Deserve Better. <br /> We Build Them That Way.
           </h1>
-          <p className="mt-6 text-md lg:text-lg text-gray-200 max-w-2xl mx-auto ">
-          Expert roofing, gutters, and exterior renovations from a local crew that treats your home like our own.
+          <p className="mt-6 text-md lg:text-lg text-gray-200 max-w-2xl ">
+            Expert roofing, gutters, and exterior renovations from a local crew that treats your home like our own.
           </p>
-          <Button className="mt-6 bg-[#FF6900] hover:bg-[#FF6900]/90 text-black rounded-none">Get Your Free Estimate</Button>
+          
         </div>
       </section>
       <section>
@@ -53,9 +56,9 @@ export default function Home() {
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 ">
             <div>
               <h2 className="text-md text-[#FF6900] font-bold  ">
-                Roofing Services
+                SERVICES
               </h2>
-              <h2 className="text-4xl font-bold  ">
+              <h2 className="text-4xl font-bold pt-2 leading-tight">
                 Top notch roofing services, <br /> trusted by many in CT
               </h2>
             </div>
@@ -130,11 +133,14 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Why Choose A&R Renovations?</h2>
-          <p className="text-md md:text-lg mb-4 text-muted-foreground">
-            Our team brings precision, honesty, and a neighborly attitude to every job we take on. We're family-owned and locally trusted for roofing, gutters, and siding upgrades that actually last—and for clear communication every step of the way. 
+          <h2 className="text-md text-[#FF6900] font-bold  ">
+               WHY CHOOSE A&R RENOVATIONS?
+          </h2>
+          <h2 className="text-4xl pt-2 font-bold mb-4 leading-tight">Why CT homeowners choose A&R Renovations?</h2>
+          <p className="text-md md:text-lg mb-4 ">
+            Our team brings precision, honesty, and a neighborly attitude to every job we take on. We're family-owned and locally trusted for roofing, gutters, and siding upgrades that actually last and for clear communication every step of the way. 
           </p>
-          <ul className="list-disc ml-5 text-md space-y-2 text-muted-foreground">
+          <ul className="list-disc ml-5 text-md space-y-2 ">
             <li>Licensed, insured, and safety-first on every project</li>
             <li>Locally based — fast response and personal service</li>
             <li>No high-pressure sales, just honest recommendations</li>
