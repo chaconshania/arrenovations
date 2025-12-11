@@ -186,15 +186,15 @@ export default function Home() {
           />
           <Card 
             imageUrl="https://images.unsplash.com/photo-1673645652590-9d21295bf4ac?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            title="Gutter Installation"
-            description="Professional gutter systems"
-            link="/gutters"
+            title="Skylights & Ventilation"
+            description="Bring light in and keep moisture out. We install energy-efficient skylights and ridge vents that help your roof breathe — literally."
+            link="/skylights-ventilation"
           />
           <Card 
-            imageUrl="https://images.unsplash.com/photo-1673645652590-9d21295bf4ac?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            title="Exterior Renovations"
-            description="Complete home exterior makeovers"
-            link="/renovations"
+            imageUrl="https://images.unsplash.com/photo-1685537711146-d6c29e41eeb6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            title="Chimney Flashings & Waterproofing"
+            description="Protect one of the most leak-prone areas of your roof. We repair damaged flashing, seal gaps, and apply durable waterproofing to keep your home dry and secure through every season."
+            link="/chimney-flashings"
           />
         </div>
         </section>
