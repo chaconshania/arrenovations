@@ -109,7 +109,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 ">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2  gap-2">
             <div>
               <h2 className="text-md text-[#FF6900] font-bold  ">
                 SERVICES
@@ -148,7 +148,7 @@ export default function Home() {
               </h2>
             </div>
             <div className="pt-3 lg:pt-0">
-              <p className="text-md pt-0 md:pt-10 md:text-lg mb-4 ">
+              <p className="text-md md:text-lg mb-4 ">
                For over a decade, A&R Renovations has been the trusted name for roof repair, gutter installation, siding, and emergency fixes across Connecticut. We&apos;re not the biggest company out there—and that&apos;s exactly how our customers like it. <br /> <br />
               Every project gets our full attention, from the first call to the final cleanup. Whether you&apos;re dealing with storm damage, planning a full exterior refresh, or just need gutters that actually work, we show up on time, do it right, and stand behind our work.
               </p>
@@ -198,7 +198,7 @@ export default function Home() {
           />
         </div>
         </section>
-      <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-2">
       <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
