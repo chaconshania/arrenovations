@@ -4,11 +4,25 @@ import Grid from "@/components/grid";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 
 export default function Home() {
   const servicesRef = useRef(null);
   const whyUsRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const { scrollYProgress: servicesProgress } = useScroll({
     target: servicesRef,
@@ -24,6 +38,44 @@ export default function Home() {
   const servicesFillLine2 = useTransform(servicesProgress, [0.3, 0.8], ["0%", "100%"]);
   const whyUsFillLine1 = useTransform(whyUsProgress, [0.1, 0.6], ["0%", "100%"]);
   const whyUsFillLine2 = useTransform(whyUsProgress, [0.3, 0.8], ["0%", "100%"]);
+
+  const blogPosts = [
+    {
+      imageUrl: "https://images.unsplash.com/photo-1632759145351-1d592919f522?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=2070",
+      title: "5 Signs Your Roof Needs Immediate Attention",
+      description: "Learn how to spot the warning signs of roof damage before it becomes a costly problem.",
+      link: "/blog/roof-warning-signs"
+    },
+    {
+      imageUrl: "https://images.unsplash.com/photo-1569898773055-2f2b6e97e1ed?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=1035",
+      title: "Gutter Maintenance Tips for CT Homeowners",
+      description: "Keep your gutters flowing smoothly with these seasonal maintenance tips tailored for Connecticut weather.",
+      link: "/blog/gutter-maintenance"
+    },
+    {
+      imageUrl: "https://images.unsplash.com/photo-1612451850869-87c3c039c72e?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=985",
+      title: "Choosing the Right Siding for Your Home",
+      description: "A comprehensive guide to selecting siding materials that match your style and withstand CT&apos;s climate.",
+      link: "/blog/choosing-siding"
+    },
+    {
+      imageUrl: "https://images.unsplash.com/photo-1673645652590-9d21295bf4ac?q=80&w=2072&auto=format&fit=crop",
+      title: "Storm Damage? Here is What to Do Next",
+      description: "Step-by-step guide for handling emergency roof repairs and working with insurance after severe weather.",
+      link: "/blog/storm-damage-guide"
+    }
+  ];
+
+  const cardsPerView = isMobile ? 1 : 3;
+  const maxSlides = Math.ceil(blogPosts.length / cardsPerView);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % maxSlides);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + maxSlides) % maxSlides);
+  };
 
   return (
     <div className="mx-4 space-y-10">
@@ -96,7 +148,7 @@ export default function Home() {
               </h2>
             </div>
             <div className="pt-3 lg:pt-0">
-              <p className="text-md pt-0 md:pt-10">
+              <p className="text-md pt-0 md:pt-10 md:text-lg mb-4 ">
                For over a decade, A&R Renovations has been the trusted name for roof repair, gutter installation, siding, and emergency fixes across Connecticut. We&apos;re not the biggest company out there—and that&apos;s exactly how our customers like it. <br /> <br />
               Every project gets our full attention, from the first call to the final cleanup. Whether you&apos;re dealing with storm damage, planning a full exterior refresh, or just need gutters that actually work, we show up on time, do it right, and stand behind our work.
               </p>
@@ -201,20 +253,182 @@ export default function Home() {
           </p>
           <p className="text-md md:text-lg mb-4 "> We&apos;re licensed and insured, and we always put safety first on every project. Because we&apos;re local, you get quick responses and service that feels personal. We don&apos;t believe in pushy sales tactics. We just give honest recommendations about what you actually need. Every project also comes with a free detailed estimate and clear photos so you always know what&apos;s going on.</p>
         </motion.div>
-      
+
       </section>
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden rounded-2xl bg-[#FF6900] mb-10">
-        <div className="bg-[#FF6900]" />
-        <div className="text-center px-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Ready to <span className="text-[#000] font-black">Transform</span> Your Home?
-          </h2>
-          <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">
-            Get a free estimate today and see why Connecticut homeowners trust A&R Renovations for all their exterior needs.
-          </p>
-          <Button className="bg-[#000] hover:bg-[#FF6900]/90 text-white rounded-none">
-            Get Your Free Estimate
-          </Button>
+
+      {/* Blog Carousel Section */}
+      <section className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <h2 className="text-md text-[#FF6900] font-bold">BLOG</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-4xl font-bold pt-2 leading-tight">
+              Latest Tips & Insights
+            </h2>
+            <div className="flex gap-2">
+              <button
+                onClick={prevSlide}
+                className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex gap-2"
+            animate={{ x: `${-currentSlide * (isMobile ? 100 : 100)}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
+            {blogPosts.map((post, index) => (
+              <div key={index} className="min-w-[calc(100%-0.5rem)] md:min-w-[calc(33.333%-0.5rem)]">
+                <Card
+                  imageUrl={post.imageUrl}
+                  title={post.title}
+                  description={post.description}
+                  link={post.link}
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="relative overflow-hidden rounded-2xl bg-gray-100 mb-10">
+        <div className="max-w-7xl mx-auto py-12 md:px-2 px-2 md:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-md text-[#FF6900] font-bold">GET IN TOUCH</h2>
+              <h2 className="text-3xl md:text-5xl font-bold pt-2 mb-6 leading-tight">
+                Ready to <span className="text-[#FF6900]">Transform</span> Your Home?
+              </h2>
+              <p className="text-md md:text-lg mb-6 text-gray-700">
+                Fill out the form and we&apos;ll get back to you within 24 hours. <br/> Or call us directly at <span className="font-bold text-[#FF6900]">(203) 943-8650</span>
+              </p>
+             
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <form className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                      First Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                      Last Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">
+                    Service Needed
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="service"
+                      name="service"
+                      className="w-full px-4 py-3 pr-10 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all appearance-none"
+                    >
+                      <option value="">Select a service</option>
+                      <option value="roofing">Roofing</option>
+                      <option value="gutters">Gutters</option>
+                      <option value="siding">Siding</option>
+                      <option value="emergency">Emergency Repair</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all resize-none"
+                    placeholder="Tell us about your project..."
+                  ></textarea>
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full bg-[#FF6900] hover:bg-[#FF6900]/90 text-white py-6 text-lg rounded-none"
+                >
+                  Send Message
+                </Button>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </section>
      
