@@ -150,7 +150,7 @@ export default function Home() {
             backgroundImage: "url('/images/hero/cover_image.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundAttachment: "fixed"
+            backgroundAttachment: isMobile ? "scroll" : "fixed"
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
@@ -376,7 +376,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-md text-[#FF6900] font-bold">GET IN TOUCH</h2>
-              <h2 className="text-3xl md:text-5xl font-bold pt-2 mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold pt-2 mb-6 leading-tight">
                 Ready to <span className="text-[#FF6900]">Transform</span> Your Home?
               </h2>
               <p className="text-md md:text-lg mb-6 text-gray-700">

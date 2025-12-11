@@ -26,26 +26,49 @@ export function Card({
   link,
 }: CardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const titleControls = useAnimation();
   const contentControls = useAnimation();
 
   useEffect(() => {
-    if (isHovered) {
-      titleControls.start({ y: -15, transition: { duration: 0.3 } });
-      contentControls.start({ 
-        opacity: 1, 
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // On mobile, always show description
+    if (isMobile) {
+      titleControls.start({ y: 0, transition: { duration: 0.3 } });
+      contentControls.start({
+        opacity: 1,
         height: "auto",
         transition: { duration: 0.4, ease: "easeInOut" }
       });
     } else {
-      titleControls.start({ y: 0, transition: { duration: 0.3 } });
-      contentControls.start({ 
-        opacity: 0, 
-        height: 0,
-        transition: { duration: 0.3, ease: "easeInOut" }
-      });
+      // On desktop, use hover behavior
+      if (isHovered) {
+        titleControls.start({ y: -15, transition: { duration: 0.3 } });
+        contentControls.start({
+          opacity: 1,
+          height: "auto",
+          transition: { duration: 0.4, ease: "easeInOut" }
+        });
+      } else {
+        titleControls.start({ y: 0, transition: { duration: 0.3 } });
+        contentControls.start({
+          opacity: 0,
+          height: 0,
+          transition: { duration: 0.3, ease: "easeInOut" }
+        });
+      }
     }
-  }, [isHovered, titleControls, contentControls]);
+  }, [isHovered, isMobile, titleControls, contentControls]);
 
   const CardContent = (
     <motion.div
@@ -125,7 +148,9 @@ export function Card({
 
       {/* Hover effect overlay */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className={`absolute inset-0 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 ${
+          isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+        }`}
         initial={false}
       />
     </motion.div>
