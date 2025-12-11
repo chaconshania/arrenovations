@@ -13,6 +13,19 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Contact form state
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -75,6 +88,55 @@ export default function Home() {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + maxSlides) % maxSlides);
+  };
+
+  // Contact form handlers
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: ''
+      });
+
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 5000);
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -329,7 +391,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -339,6 +401,8 @@ export default function Home() {
                       type="text"
                       id="firstName"
                       name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
                     />
@@ -351,6 +415,8 @@ export default function Home() {
                       type="text"
                       id="lastName"
                       name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
                     />
@@ -365,6 +431,8 @@ export default function Home() {
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
                   />
@@ -378,6 +446,8 @@ export default function Home() {
                     type="tel"
                     id="phone"
                     name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all"
                   />
@@ -391,6 +461,8 @@ export default function Home() {
                     <select
                       id="service"
                       name="service"
+                      value={formData.service}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 pr-10 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all appearance-none"
                     >
                       <option value="">Select a service</option>
@@ -414,17 +486,32 @@ export default function Home() {
                     id="message"
                     name="message"
                     rows={4}
+                    value={formData.message}
+                    onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:border-transparent transition-all resize-none"
                     placeholder="Tell us about your project..."
                   ></textarea>
                 </div>
 
+                {submitStatus === 'success' && (
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+                    Thank you! Your message has been sent successfully. We&apos;ll get back to you soon.
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                    {errorMessage || 'Something went wrong. Please try again.'}
+                  </div>
+                )}
+
                 <Button
                   type="submit"
-                  className="w-full bg-[#FF6900] hover:bg-[#FF6900]/90 text-white py-6 text-lg rounded-none"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#FF6900] hover:bg-[#FF6900]/90 text-white py-6 text-lg rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </motion.div>
