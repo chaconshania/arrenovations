@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 
 import { Manrope } from "next/font/google";
 import { Footer } from "@/components/footer";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const manrope = Manrope({ subsets: ["latin"], weight: "400" });
 
 const geistSans = Geist({
@@ -35,6 +36,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   );

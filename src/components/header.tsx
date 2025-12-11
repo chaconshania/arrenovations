@@ -29,9 +29,11 @@ export function Header() {
 
   return (
     <>
+    {/* 
       <div className="p-2 bg-[#FF6900] text-center font-bold flex items-center justify-center">
           <div><p>Call us today for a free estimate: (203) 943-8650</p></div>
       </div>
+      */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
