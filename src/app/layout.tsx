@@ -6,6 +6,7 @@ import { Header } from "@/components/header";
 import { Manrope } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 const manrope = Manrope({ subsets: ["latin"], weight: "400" });
 
 const geistSans = Geist({
@@ -20,9 +21,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title:
-    "Roofing, Siding & K-Style Gutters | A&R Renovations LLC – Free Estimates",
+    "Roofing & Gutter Contractors Fairfield County CT | A&R Renovations",
   description:
-    "Expert roofing, siding, and K-style gutter installation. Free estimates on gutter inspections, roof repairs, and complete home exterior solutions. Call today!",
+    "Expert roofing, gutter installation & siding services in Fairfield County, CT. Licensed & insured with 10+ years experience. Serving Stamford, Norwalk, Greenwich & all of CT. Free estimates. 24/7 services",
 };
 
 export default function RootLayout({
@@ -37,6 +38,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

@@ -140,7 +140,7 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-4 space-y-10">
+    <div className="mx-4 space-y-20">
       <section
         className="relative h-[80vh] flex items-end justify-start overflow-hidden rounded-2xl"
       >
