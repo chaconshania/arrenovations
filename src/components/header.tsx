@@ -4,9 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLoader } from "@/components/loader-context";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isLoaded } = useLoader();
 
   const navItems = ["Services", "Projects", "About", "Contact"];
 
@@ -20,7 +22,7 @@ export function Header() {
           contactSection.scrollIntoView({ behavior: "smooth" });
         }
       }}
-      className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-wide"
+      className="bg-[#FF6900] text-white hover:bg-[#FF6900]/90 font-medium tracking-wide rounded-none"
     >
       Free Estimate
     </Button>
@@ -36,7 +38,7 @@ export function Header() {
       */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
         transition={{ duration: 0.6 }}
         className="sticky top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm "
       >
@@ -55,7 +57,8 @@ export function Header() {
                   href={`#${item.toLowerCase()}`}
                   className="text-sm font-normal tracking-wide hover:text-primary transition-colors"
                   initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                  transition={{ delay: isLoaded ? index * 0.05 + 0.1 : 0 }}
                   whileHover={{ y: -2 }}
                 >
                   {item}

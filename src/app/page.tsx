@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { useLoader } from "@/components/loader-context";
 
 export default function Home() {
   const servicesRef = useRef(null);
@@ -14,6 +15,16 @@ export default function Home() {
   const contactRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const { isLoaded } = useLoader();
+
+  const heroReveal = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const, delay },
+    }),
+  };
 
   // Contact form state
   const [formData, setFormData] = useState({
@@ -174,19 +185,38 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 py-12 md:px-4 lg:px-2 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8 items-end">
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+            <motion.h1
+              className="text-3xl md:text-5xl font-bold text-white leading-tight"
+              variants={heroReveal}
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              custom={0}
+            >
              Trusted Roofing & Exterior Contractors in <span className="text-[#FF6900]"> Fairfield County, CT</span>
-            </h1>
+            </motion.h1>
             <div>
-              <p className="text-md lg:text-lg text-gray-200 tracking-wide">
-                Trusted Fairfield County Roofing & Exterior Pros with 10+ Years of Experience. We specialize in roof replacement, roof repair, gutters, siding, skylights, and waterproofing. Free Estimates in 24 Hours.
-              </p>
-              <Button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="mt-4 bg-[#FF6900] hover:bg-[#FF6900]/90 text-white px-6 py-2 text-sm rounded-none"
+              <motion.p
+                className="text-md lg:text-lg text-gray-200 tracking-wide"
+                variants={heroReveal}
+                initial="hidden"
+                animate={isLoaded ? "visible" : "hidden"}
+                custom={0.1}
               >
-                Get a Free Estimate
-              </Button>
+                Trusted Fairfield County Roofing & Exterior Pros with 10+ Years of Experience. We specialize in roof replacement, roof repair, gutters, siding, skylights, and waterproofing. Free Estimates in 24 Hours.
+              </motion.p>
+              <motion.div
+                variants={heroReveal}
+                initial="hidden"
+                animate={isLoaded ? "visible" : "hidden"}
+                custom={0.2}
+              >
+                <Button
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="mt-4 bg-[#FF6900] hover:bg-[#FF6900]/90 text-white px-6 py-2 text-sm rounded-none"
+                >
+                  Get a Free Estimate
+                </Button>
+              </motion.div>
             </div>
           </div>
         </div>
