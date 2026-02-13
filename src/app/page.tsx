@@ -156,12 +156,20 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 py-8 md:px-4 lg:px-2 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8 items-end">
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-             CT Homes Deserve Better. <br /> We Build Them<span className="text-[#FF6900]"> That Way.</span>
+            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+             Trusted Roofing & Exterior Contractors in <span className="text-[#FF6900]"> Fairfield County, CT</span>
             </h1>
-            <p className="text-md lg:text-lg text-gray-200">
-              Expert roofing, gutters, and exterior renovations from a local crew that treats your home like our own.
-            </p>
+            <div>
+              <p className="text-md lg:text-lg text-gray-200 tracking-wide">
+                Trusted Fairfield County Roofing & Exterior Pros with 10+ Years of Experience. We specialize in roof replacement, roof repair, gutters, siding, skylights, and waterproofing. Free Estimates in 24 Hours.
+              </p>
+              <Button
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="mt-4 bg-[#FF6900] hover:bg-[#FF6900]/90 text-white px-6 py-2 text-sm rounded-none"
+              >
+                Get a Free Estimate
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -173,10 +181,10 @@ export default function Home() {
         >
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2  gap-2">
             <div>
-              <h2 className="text-md text-[#FF6900] font-bold  ">
+              <h2 className="text-md text-[#FF6900] font-semibold  ">
                 SERVICES
               </h2>
-              <h2 ref={servicesRef} className="text-4xl font-bold pt-2 leading-tight">
+              <h2 ref={servicesRef} className="text-4xl font-semibold pt-2 leading-tight">
                 <motion.span
                   className="block"
                   style={{
@@ -267,10 +275,10 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-md text-[#FF6900] font-bold  ">
-               WHY US?
+          <h2 className="text-md text-[#FF6900] font-semibold  ">
+               WHY HOMEOWNERS CHOOSE A&R
           </h2>
-          <h2 ref={whyUsRef} className="text-4xl pt-2 font-bold mb-4 leading-tight">
+          <h2 ref={whyUsRef} className="text-4xl pt-2 font-semibold mb-4 leading-tight">
             <motion.span
               className="block"
               style={{
@@ -284,7 +292,7 @@ export default function Home() {
                 color: "transparent",
               }}
             >
-              Why CT homeowners choose
+              Roofing Done Right for
             </motion.span>
             <motion.span
               className="block"
@@ -299,7 +307,7 @@ export default function Home() {
                 color: "transparent",
               }}
             >
-              A&R Renovations?
+              Connecticut Weather
             </motion.span>
           </h2>
         
@@ -311,9 +319,17 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-md md:text-lg mb-4 ">
-            Our team brings precision, honesty, and a neighborly attitude to every job we take on. We&apos;re family-owned and locally trusted for roofing, gutters, and siding upgrades that actually last and for clear communication every step of the way.
+            Connecticut weather can be unpredictable. From heavy snow to summer storms, your roof and exterior need to be built to last. At A&R Renovations LLC, we provide professional roofing and exterior services designed specifically for homes in Fairfield County and surrounding Connecticut towns.
           </p>
-          <p className="text-md md:text-lg mb-4 "> We&apos;re licensed and insured, and we always put safety first on every project. Because we&apos;re local, you get quick responses and service that feels personal. We don&apos;t believe in pushy sales tactics. We just give honest recommendations about what you actually need. Every project also comes with a free detailed estimate and clear photos so you always know what&apos;s going on.</p>
+          <p className="text-md md:text-lg mb-4 ">We focus on durable materials, proper installation, and long-term protection — not shortcuts.</p>
+          <ul className="text-md md:text-lg space-y-2 list-disc list-inside">
+            <li>Roof replacement &amp; new roof installation</li>
+            <li>Roof repair &amp; storm damage repair</li>
+            <li>Gutter installation &amp; gutter guards</li>
+            <li>Siding installation &amp; exterior upgrades</li>
+            <li>Skylight installation</li>
+            <li>Waterproofing solutions</li>
+          </ul>
         </motion.div>
 
       </section>
@@ -321,9 +337,9 @@ export default function Home() {
       {/* Blog Carousel Section */}
       <section className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h2 className="text-md text-[#FF6900] font-bold">BLOG</h2>
+          <h2 className="text-md text-[#FF6900] font-semibold">BLOG</h2>
           <div className="flex items-center justify-between">
-            <h2 className="text-4xl font-bold pt-2 leading-tight">
+            <h2 className="text-4xl font-semibold pt-2 leading-tight">
               Latest Tips & Insights
             </h2>
             <div className="flex gap-2">
@@ -366,7 +382,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="relative overflow-hidden rounded-2xl bg-gray-100 mb-10">
+      <section id="contact" className="relative overflow-hidden rounded-2xl bg-gray-100 mb-10">
         <div className="max-w-7xl mx-auto py-12 md:px-2 px-2 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <motion.div
@@ -375,12 +391,12 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-md text-[#FF6900] font-bold">GET IN TOUCH</h2>
-              <h2 className="text-4xl md:text-5xl font-bold pt-2 mb-6 leading-tight">
+              <h2 className="text-md text-[#FF6900] font-semibold">GET IN TOUCH</h2>
+              <h2 className="text-4xl md:text-5xl font-semibold pt-2 mb-6 leading-tight">
                 Ready to <span className="text-[#FF6900]">Transform</span> Your Home?
               </h2>
               <p className="text-md md:text-lg mb-6 text-gray-700">
-                Fill out the form and we&apos;ll get back to you within 24 hours. <br/> Or call us directly at <span className="font-bold text-[#FF6900]">(203) 943-8650</span>
+                Fill out the form and we&apos;ll get back to you within 24 hours. <br/> Or call us directly at <span className="font-semibold text-[#FF6900]">(203) 943-8650</span>
               </p>
              
             </motion.div>

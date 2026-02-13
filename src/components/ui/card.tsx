@@ -96,7 +96,7 @@ export function Card({
       <div className="relative z-10 flex h-full min-h-[400px]  flex-col justify-end p-6">
         {title && (
           <motion.h3
-            className="mb-2 text-2xl font-bold text-white"
+            className="mb-2 text-2xl font-semibold text-white"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

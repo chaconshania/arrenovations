@@ -44,7 +44,7 @@ export function Header() {
         
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <motion.div className="text-xl font-extrabold">
+            <motion.div className="text-xl font-bold">
               A&R RENOVATIONS
             </motion.div>
 
@@ -53,7 +53,7 @@ export function Header() {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-sm font-light tracking-wide hover:text-primary transition-colors"
+                  className="text-sm font-normal tracking-wide hover:text-primary transition-colors"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   whileHover={{ y: -2 }}
@@ -97,7 +97,7 @@ export function Header() {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-3xl font-light tracking-wide hover:text-primary transition-colors"
+                  className="text-3xl font-normal tracking-wide hover:text-primary transition-colors"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 + 0.2 }}

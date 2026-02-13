@@ -13,8 +13,8 @@ export function Footer() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-light mb-6">A&R RENOVATIONS</h3>
-            <div className="space-y-2 text-sm font-light"></div>
+            <h3 className="text-2xl font-semibold mb-6">A&R RENOVATIONS</h3>
+            <div className="space-y-2 text-sm font-normal"></div>
           </motion.div>
 
           <motion.div
@@ -23,8 +23,8 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-sm font-light mb-6 ">Services</h4>
-            <div className="space-y-2 text-sm font-light opacity-80">
+            <h4 className="text-sm font-semibold mb-6 ">Services</h4>
+            <div className="space-y-2 text-sm font-normal opacity-80">
               <div>Residential Roofing</div>
               <div>Commercial Roofing</div>
               <div>Roof Repairs</div>
@@ -38,8 +38,8 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-sm font-light mb-6 ">Navigation</h4>
-            <div className="space-y-2 text-sm font-light opacity-80">
+            <h4 className="text-sm font-semibold mb-6 ">Navigation</h4>
+            <div className="space-y-2 text-sm font-normal opacity-80">
               <div>Services</div>
               <div>Projects</div>
               <div>About</div>
@@ -53,8 +53,8 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-sm font-light mb-6 ">Contact</h4>
-            <div className="space-y-2 text-sm font-light opacity-80">
+            <h4 className="text-sm font-semibold mb-6 ">Contact</h4>
+            <div className="space-y-2 text-sm font-normal opacity-80">
               <div>arrenovations.mc@gmail.com</div>
               <div>(203) 943-8650</div>
               <div>Serving Fairfield County</div>
@@ -69,7 +69,7 @@ export function Footer() {
           viewport={{ once: true }}
           className="border-t border-primary-foreground/20 mt-12 pt-8 text-center"
         >
-          <p className="text-sm font-light opacity-60">
+          <p className="text-sm font-normal opacity-60">
             © 2025 A&R Renovations LLC. All rights reserved.
           </p>
         </motion.div>
