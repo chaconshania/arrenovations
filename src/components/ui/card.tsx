@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, useAnimation } from "framer-motion";
-import { ReactNode, useEffect, useState } from "react";
+import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Button } from "./button";
 import { ArrowRight } from "lucide-react";
 
 interface CardProps {
@@ -29,6 +28,15 @@ export function Card({
   const [isMobile, setIsMobile] = useState(false);
   const titleControls = useAnimation();
   const contentControls = useAnimation();
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.92]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.4, 1, 1, 0.4]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -72,11 +80,9 @@ export function Card({
 
   const CardContent = (
     <motion.div
+      ref={cardRef}
       className={`group relative overflow-hidden rounded-lg ${className}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      style={{ scale, opacity }}
       whileTap={{ scale: 0.98 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -97,10 +103,6 @@ export function Card({
         {title && (
           <motion.h3
             className="mb-2 text-2xl font-semibold text-white"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
             animate={titleControls}
           >
             {title}
@@ -135,14 +137,9 @@ export function Card({
         </motion.div>
 
         {children && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
+          <div>
             {children}
-          </motion.div>
+          </div>
         )}
       </div>
 

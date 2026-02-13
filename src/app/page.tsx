@@ -10,6 +10,8 @@ import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 export default function Home() {
   const servicesRef = useRef(null);
   const whyUsRef = useRef(null);
+  const heroRef = useRef(null);
+  const contactRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -51,6 +53,20 @@ export default function Home() {
   const servicesFillLine2 = useTransform(servicesProgress, [0.3, 0.8], ["0%", "100%"]);
   const whyUsFillLine1 = useTransform(whyUsProgress, [0.1, 0.6], ["0%", "100%"]);
   const whyUsFillLine2 = useTransform(whyUsProgress, [0.3, 0.8], ["0%", "100%"]);
+
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroScale = useTransform(heroProgress, [0, 0.8, 1], [1, 1, 0.92]);
+  const heroOpacity = useTransform(heroProgress, [0, 0.8, 1], [1, 1, 0.4]);
+
+  const { scrollYProgress: contactProgress } = useScroll({
+    target: contactRef,
+    offset: ["start end", "end start"],
+  });
+  const contactScale = useTransform(contactProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.92]);
+  const contactOpacity = useTransform(contactProgress, [0, 0.3, 0.7, 1], [0.4, 1, 1, 0.4]);
 
   const blogPosts = [
     {
@@ -140,9 +156,11 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-4 space-y-20">
-      <section
-        className="relative h-[80vh] flex items-end justify-start overflow-hidden rounded-2xl"
+    <div className="mx-4 space-y-32">
+      <motion.section
+        ref={heroRef}
+        className="relative h-[90vh] flex items-end justify-start overflow-hidden rounded-2xl"
+        style={{ scale: heroScale, opacity: heroOpacity }}
       >
         <motion.div
           className="absolute inset-0"
@@ -155,7 +173,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         <div className="relative z-10 w-full">
-          <div className="max-w-7xl mx-auto px-6 py-8 md:px-4 lg:px-2 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8 items-end">
+          <div className="max-w-7xl mx-auto px-6 py-12 md:px-4 lg:px-2 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8 items-end">
             <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
              Trusted Roofing & Exterior Contractors in <span className="text-[#FF6900]"> Fairfield County, CT</span>
             </h1>
@@ -172,7 +190,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
       <section>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -229,7 +247,7 @@ export default function Home() {
      
       </section>
       <section>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           <Card 
             imageUrl="https://images.unsplash.com/photo-1632759145351-1d592919f522?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070"
             title="Roofing Services"
@@ -268,7 +286,7 @@ export default function Home() {
           />
         </div>
         </section>
-      <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-2">
+      <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
       <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -363,12 +381,12 @@ export default function Home() {
 
         <div className="overflow-hidden">
           <motion.div
-            className="flex gap-2"
+            className="flex gap-4 md:gap-6"
             animate={{ x: `${-currentSlide * (isMobile ? 100 : 100)}%` }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             {blogPosts.map((post, index) => (
-              <div key={index} className="min-w-[calc(100%-0.5rem)] md:min-w-[calc(33.333%-0.5rem)]">
+              <div key={index} className="min-w-[calc(100%-1rem)] md:min-w-[calc(33.333%-1rem)]">
                 <Card
                   imageUrl={post.imageUrl}
                   title={post.title}
@@ -382,15 +400,10 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative overflow-hidden rounded-2xl bg-gray-100 mb-10">
-        <div className="max-w-7xl mx-auto py-12 md:px-2 px-2 md:py-16">
+      <motion.section ref={contactRef} id="contact" className="relative overflow-hidden rounded-2xl bg-gray-100 mb-10" style={{ scale: contactScale, opacity: contactOpacity }}>
+        <div className="max-w-7xl mx-auto py-16 md:px-2 px-2 md:py-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <h2 className="text-md text-[#FF6900] font-semibold">GET IN TOUCH</h2>
               <h2 className="text-4xl md:text-5xl font-semibold pt-2 mb-6 leading-tight">
                 Ready to <span className="text-[#FF6900]">Transform</span> Your Home?
@@ -398,15 +411,10 @@ export default function Home() {
               <p className="text-md md:text-lg mb-6 text-gray-700">
                 Fill out the form and we&apos;ll get back to you within 24 hours. <br/> Or call us directly at <span className="font-semibold text-[#FF6900]">(203) 943-8650</span>
               </p>
-             
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            </div>
+
+            <div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -530,11 +538,11 @@ export default function Home() {
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </section>
-     
+      </motion.section>
+
     </div>
   );
 }
